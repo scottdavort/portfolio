@@ -1,0 +1,145 @@
+/* styles/Home.module.css */
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  padding: 24px;
+  background: #4A5568; /* Example background color */
+}
+
+.contentContainer {
+  max-width: 1280px; /* Adjusted for Tailwind's 4xl */
+  width: 100%;
+  border-radius: 0.5rem; /* Example for Tailwind's lg */
+  overflow: hidden;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Example for Tailwind's xl */
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 100%;
+  padding: 1rem 0;
+  background: #2D3748; /* Example footer background color */
+  color: #A0AEC0; /* Example footer text color */
+}
+
+
+.header {
+  text-align: center;
+}
+
+.navbar {
+  padding: 16px;
+  background: #2D3748; /*  navbar background color */
+  color: #E2E8F0; /*  navbar text color */
+  height: '100px'; 
+  width: '100%'; 
+  border: '2px solid red'; 
+  padding: '1rem'; 
+  position: 'relative'; 
+  z-index: '30';
+}
+.title {
+  margin: 0;
+  font-size: 48px;
+  color: #E2E8F0; /* Example title color */
+}
+
+.sidebar {
+  padding: 16px;
+  background: #2D3748; /*  navbar background color */
+  color: #E2E8F0; /*  navbar text color */
+  height: '100px'; 
+  width: '100%'; 
+  padding: '1rem'; 
+  position: 'relative'; 
+  text-align: right;
+  position: 'fixed';
+  z-index: '100';
+  padding-top: 150px;
+}
+
+.subtitle {
+  font-size: 24px;
+  color: #A0AEC0; /* Example subtitle color */
+}
+
+.optionsContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+.option {
+  margin: 8px;
+  padding: 20px;
+  border-radius: 10px;
+  background: #2D3748; 
+  color: #E2E8F0; 
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100px;
+}
+
+.promptContainer {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  background: #1A202C; /* Adjusted for the prompt background color */
+}
+
+.promptInput {
+  flex-grow: 1;
+  margin-right: 20px;
+  padding: 12px 20px;
+  background: #2D3748; /* Example input background color */
+  border: 1px solid #4A5568; /* Example input border color */
+  border-radius: 4px;
+  color: #E2E8F0; /* Example input text color */
+}
+
+.promptButton {
+  padding: 12px 20px;
+  background: #3182CE; /* Example button background color */
+  border: none;
+  border-radius: 4px;
+  color: #E2E8F0; /* Example button text color */
+  cursor: pointer;
+}
+
+
+
+/* Additional Styles */
+.response-section {
+  padding-left: 50px; /* Adjust this value as needed */
+  text-align: left;
+  font-family: 'Inconsolata, monospace'; /* Cybersecurity-themed font */
+}
+
+.message {
+  margin-bottom: 10px;
+}
+
+.message.user {
+  font-weight: bold;
+}
+
+.message.assistant {
+  color: #4CAF50; /* Example color */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .optionsContainer {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
