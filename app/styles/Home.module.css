@@ -1,4 +1,7 @@
 /* styles/Home.module.css */
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
+/* import tailwindcss from 'tailwindcss'; */
+
 
 .mainContainer {
   display: flex;
@@ -6,15 +9,19 @@
   justify-content: center;
   height: 100vh;
   padding: 24px;
-  background: #4A5568; /* Example background color */
+  background: #4A5568;
+  /* Example background color */
 }
 
 .contentContainer {
-  max-width: 1280px; /* Adjusted for Tailwind's 4xl */
+  max-width: 1280px;
+  /* Adjusted for Tailwind's 4xl */
   width: 100%;
-  border-radius: 0.5rem; /* Example for Tailwind's lg */
+  border-radius: 0.5rem;
+  /* Example for Tailwind's lg */
   overflow: hidden;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Example for Tailwind's xl */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  /* Example for Tailwind's xl */
 }
 
 .footer {
@@ -24,8 +31,10 @@
   height: 100px;
   width: 100%;
   padding: 1rem 0;
-  background: #2D3748; /* Example footer background color */
-  color: #A0AEC0; /* Example footer text color */
+  background: #2D3748;
+  /* Example footer background color */
+  color: #A0AEC0;
+  /* Example footer text color */
 }
 
 
@@ -33,31 +42,62 @@
   text-align: center;
 }
 
+.hero {
+  .absolute {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    /* background-image: url('path/to/bg-pattern-2.jpg'); */
+    background-color: #3182CE;
+    background-size: cover;
+    background-position: center;
+  }
+
+  @media (min-width: 768px) {
+    .absolute {
+      right: -28px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .absolute {
+      top: -60px;
+    }
+  }
+}
 .navbar {
   padding: 16px;
-  background: #2D3748; /*  navbar background color */
-  color: #E2E8F0; /*  navbar text color */
-  height: '100px'; 
-  width: '100%'; 
-  border: '2px solid red'; 
-  padding: '1rem'; 
-  position: 'relative'; 
+  background: #2D3748;
+  /*  navbar background color */
+  color: #E2E8F0;
+  /*  navbar text color */
+  height: '100px';
+  width: '100%';
+  border: '2px solid red';
+  padding: '1rem';
+  position: 'relative';
   z-index: '30';
 }
+
 .title {
   margin: 0;
   font-size: 48px;
-  color: #E2E8F0; /* Example title color */
+  color: #E2E8F0;
+  /* Example title color */
 }
 
 .sidebar {
   padding: 16px;
-  background: #2D3748; /*  navbar background color */
-  color: #E2E8F0; /*  navbar text color */
-  height: '100px'; 
-  width: '100%'; 
-  padding: '1rem'; 
-  position: 'relative'; 
+  background: #2D3748;
+  /*  navbar background color */
+  color: #E2E8F0;
+  /*  navbar text color */
+  height: '100px';
+  width: '100%';
+  padding: '1rem';
+  position: 'relative';
   text-align: right;
   position: 'fixed';
   z-index: '100';
@@ -66,7 +106,8 @@
 
 .subtitle {
   font-size: 24px;
-  color: #A0AEC0; /* Example subtitle color */
+  color: #A0AEC0;
+  /* Example subtitle color */
 }
 
 .optionsContainer {
@@ -81,8 +122,8 @@
   margin: 8px;
   padding: 20px;
   border-radius: 10px;
-  background: #2D3748; 
-  color: #E2E8F0; 
+  background: #2D3748;
+  color: #E2E8F0;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -94,25 +135,31 @@
   padding: 20px;
   display: flex;
   align-items: center;
-  background: #1A202C; /* Adjusted for the prompt background color */
+  background: #1A202C;
+  /* Adjusted for the prompt background color */
 }
 
 .promptInput {
   flex-grow: 1;
   margin-right: 20px;
   padding: 12px 20px;
-  background: #2D3748; /* Example input background color */
-  border: 1px solid #4A5568; /* Example input border color */
+  background: #2D3748;
+  /* Example input background color */
+  border: 1px solid #4A5568;
+  /* Example input border color */
   border-radius: 4px;
-  color: #E2E8F0; /* Example input text color */
+  color: #E2E8F0;
+  /* Example input text color */
 }
 
 .promptButton {
   padding: 12px 20px;
-  background: #3182CE; /* Example button background color */
+  background: #3182CE;
+  /* Example button background color */
   border: none;
   border-radius: 4px;
-  color: #E2E8F0; /* Example button text color */
+  color: #E2E8F0;
+  /* Example button text color */
   cursor: pointer;
 }
 
@@ -120,9 +167,11 @@
 
 /* Additional Styles */
 .response-section {
-  padding-left: 50px; /* Adjust this value as needed */
+  padding-left: 50px;
+  /* Adjust this value as needed */
   text-align: left;
-  font-family: 'Inconsolata, monospace'; /* Cybersecurity-themed font */
+  font-family: 'Inconsolata, monospace';
+  /* Cybersecurity-themed font */
 }
 
 .message {
@@ -134,7 +183,8 @@
 }
 
 .message.assistant {
-  color: #4CAF50; /* Example color */
+  color: #4CAF50;
+  /* Example color */
 }
 
 /* Media Queries for Responsiveness */

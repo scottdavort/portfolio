@@ -2,7 +2,7 @@ import Link from "next/link";
 import styles from '../styles/Home.module.css';
 
 // Navbar component with a link to the home page
-const Sidebar = () => {
+const SideBar__content = () => {
   return (
     <nav className={`${styles.sidebar} flexBetween max-container padding-container`}>
     <Link href="/book-meeting">
@@ -18,4 +18,4 @@ const Sidebar = () => {
   );
 }
 
-export default Sidebar;
+export default SideBar__content;
