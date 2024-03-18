@@ -1,9 +1,11 @@
+'use client'
 // app/components/ScrollingFeature.tsx
 import React from 'react';
+import { motion, useViewportScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 // import global.css 
-import '../styles/globals.css';
 
+import '../styles/globals.css';
 
 
 // highlights array
@@ -27,28 +29,39 @@ const highlights = [
   // Add more highlight objects here
 ];
 
+// Assuming highlights data is defined here or imported
+
 const ScrollingFeature = () => {
+  const { scrollYProgress } = useViewportScroll();
+
+  // This useTransform hook maps the scrollYProgress (0 to 1) to an opacity value (1 to 0)
+  // As the user scrolls down, the opacity will decrease, causing content to fade away
+  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+
   return (
-    <div className="space-y-8 bg-gray-700 min-h-screen flex flex-col items-center">
+    <div className="space-y-8 bg-gray-700 min-h-screen flex flex-col items-center overflow-auto">
+      {/* Progress tracker bar */}
+      <motion.div className="fixed top-0 left-0 h-1 bg-red-500 z-50" style={{ width: '100%', scaleX: scrollYProgress }} initial={{ scaleX: 0 }} />
+
       {highlights.map((highlight, index) => (
-        <div key={index} className="highlight-section text-center p-4">
-          <div className="fade-in-out text-xl font-semibold">{highlight.date}</div>
+        <motion.div
+          key={index}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="highlight-section text-center p-4 w-full"
+          style={{ opacity }} // Apply the dynamically changing opacity here
+        >
+          <div className="text-xl font-semibold">{highlight.date}</div>
           <p>{highlight.content}</p>
           <div className="flex justify-around items-center w-full xl:h-auto">
             {highlight.images.map((image, imgIndex) => (
-              <div key={imgIndex} className="fade-in xl:w-1/2 xl:flex xl:justify-end xl:items-end">
-                {/* Adjusting Image size to be more responsive */}
-                <Image
-                  src={image}
-                  alt={`Highlight Image ${imgIndex}`}
-                  width={500} // Set to your desired width
-                  height={500} // Set to maintain aspect ratio
-                  layout="responsive"
-                />
-              </div>
+              <motion.div key={imgIndex} className="fade-in xl:w-1/2 xl:flex xl:justify-end xl:items-end" style={{ opacity }}>
+                <Image src={image} alt={`Highlight Image ${imgIndex}`} width={500} height={500} layout="responsive" />
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       ))}
     </div>
   );
