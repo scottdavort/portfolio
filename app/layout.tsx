@@ -1,41 +1,52 @@
-// The root layout is defined at the top level of the app directory and applies to all routes. 
-// This layout is required and must contain html and body tags, allowing you to modify the initial HTML returned from the server.
+'use client';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import Hero from './components/Hero';
+import Skills from './components/Skills'; // New Skills component
+import Timeline from './components/Timeline'; // New Timeline component
+import SideBar__function from './components/SideBar__function';
+import ScrollingFeature from './components/MainContent'; // New ScrollingFeature component
+import { useRouter } from 'next/router';
+import MainContent from './components/MainContent';
 
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
-import React from 'react'
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
-import Hero from './components/Hero'
-import ScrollingFeature from './components/ScrollingFeature'
-import SideBar__function from './components/SideBar__function'
+const inter = Inter({ subsets: ['latin'] });
 
-const inter = Inter({ subsets: ['latin'] })
+/**
+ * Component representing the application's root layout. This layout is applied to all routes.
+ *
+ * @param {React.ReactNode} children The child components to be rendered within the layout.
+ * @returns The root layout component.
+ */
 
-export const metadata: Metadata = {
-  title: 'Scott Manley | Network App',
-  description: 'Interactive network app for Scott Manley designed with Next.js and Tailwind CSS',
-}
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname(); // Use the current path to conditionally render components
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+
   return (
-    <html lang="en">
-      <body className={inter.className}>
-       
+    <html lang="en" className={inter.className}>
+      <body>
         <Navbar />
         <Hero />
-        <main className='realtive-overflow-hidden'>
-       <ScrollingFeature />
-          {children }
+        <main className='relative overflow-hidden'>
+          {pathname === '/' && (
+            <>
+            <MainContent /> {/* Your existing ScrollingFeature component */}
+              <Skills /> {/* Render the Skills component only on the root path */}
+              <Timeline /> {/* Render the Timeline component only on the root path */}
+            </>
+          )}
+          {children}
         </main>
-      <Footer />
+        <Footer />
       </body>
     </html>
-  )
+  );
 }
+
+
+
