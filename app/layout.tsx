@@ -1,43 +1,52 @@
 'use client';
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Hero from './components/Hero';
-import Skills from './components/Skills'; // New Skills component
-import Timeline from './components/Timeline'; // New Timeline component
+import Skills from './components/Skills'; // Assuming Skills is a component
+import Timeline from './components/Timeline'; // Assuming Timeline is a component
 import SideBar__function from './components/SideBar__function';
-import ScrollingFeature from './components/MainContent'; // New ScrollingFeature component
-import { useRouter } from 'next/router';
-import MainContent from './components/MainContent';
+import MainContent from './components/MainContent'; // Assuming MainContent is a component
 
 const inter = Inter({ subsets: ['latin'] });
 
-/**
- * Component representing the application's root layout. This layout is applied to all routes.
- *
- * @param {React.ReactNode} children The child components to be rendered within the layout.
- * @returns The root layout component.
- */
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname(); // Use the current path to conditionally render components
+  const pathname = usePathname();
+  
+  // State to manage the visibility of the sidebar
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+
+  // Function to toggle the visibility of the sidebar
+  const toggleSidebar = () => setIsSidebarVisible(!isSidebarVisible);
+// set useState to false
+  useEffect(() => {
+    setIsSidebarVisible(false);
+  }, [pathname]);
 
 
   return (
     <html lang="en" className={inter.className}>
       <body>
         <Navbar />
-        <Hero />
+        
+        {/* OneLoad set useState to false*/}
+        
+
+      {/* set the useState to false */}
+    
+        {/* <SideBar__function isSidebarVisible={isSidebarVisible} toggleSidebar={toggleSidebar} /> */}
         <main className='relative overflow-hidden'>
           {pathname === '/' && (
             <>
-            <MainContent /> {/* Your existing ScrollingFeature component */}
-              <Skills /> {/* Render the Skills component only on the root path */}
-              <Timeline /> {/* Render the Timeline component only on the root path */}
+              <Hero />
+              <MainContent />
+              
+              <Skills />
+              <Timeline />
+              {/* Additional content or components for the root path */}
             </>
           )}
           {children}
@@ -47,6 +56,3 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
-
-
-
