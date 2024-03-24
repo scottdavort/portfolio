@@ -28,7 +28,7 @@ const FieldMarketing = () => {
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
 
   return (
-    <section className="bg-gray-700 min-h-screen p-8">
+        <section className="bg-gray-700 min-h-screen p-8">
       <h1 className="text-5xl font-bold text-white text-center mb-10">Field Marketing Insights</h1>
       
       {fieldMarketingHighlights.map((highlight, index) => (
@@ -49,6 +49,7 @@ const FieldMarketing = () => {
         </motion.div>
       ))}
     </section>
+    
   );
 };
 

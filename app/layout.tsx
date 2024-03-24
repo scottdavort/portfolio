@@ -16,15 +16,6 @@ const inter = Inter({ subsets: ['latin'] });
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   
-  // State to manage the visibility of the sidebar
-  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
-
-  // Function to toggle the visibility of the sidebar
-  const toggleSidebar = () => setIsSidebarVisible(!isSidebarVisible);
-// set useState to false
-  useEffect(() => {
-    setIsSidebarVisible(false);
-  }, [pathname]);
 
 
   return (
@@ -32,11 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <Navbar />
         
-        {/* OneLoad set useState to false*/}
-        
 
-      {/* set the useState to false */}
-    
         {/* <SideBar__function isSidebarVisible={isSidebarVisible} toggleSidebar={toggleSidebar} /> */}
         <main className='relative overflow-hidden'>
           {pathname === '/' && (
