@@ -16,7 +16,7 @@ interface Message {
 export default function Home() {
 
   // Constants
-  const [isSidebarVisible, setIsSidebarVisible] = useState(true); // Add a new state for the sidebar
+
   const [threadId, setThreadId] = useState<string | null>(null); // Add a new state for the threadId
   const [currentRunId, setCurrentRunId] = useState<string | null>(null); // Add a new state for the current run ID
   const [conversation, setConversation] = useState<Message[]>([]); // Add a new state for the conversation
@@ -27,28 +27,25 @@ export default function Home() {
   const secretKey = process.env.NEXT_PUBLIC_SECRET_KEY || ''; // Default to an empty string if not set
   const assistantId = process.env.NEXT_PUBLIC_ASSISTANT_ID || ''; // Default to an empty string if not set
 
-    // Adjusted styles for floating prompt and scrollable response section
-    const floatingPromptStyle = {
-      position: 'fixed', // Makes the prompt section float above other content
-      bottom: 0, // Aligns the prompt section at the bottom of the viewport
-      width: '100%', // Ensures the prompt section spans the entire width of the viewport
-      backgroundColor: '#1a202c', // Matches the color scheme of the prompt section
-      padding: '10px 0', // Adds some padding around the prompt for better appearance
-      borderTop: '1px solid #2d3748', // Adds a subtle border on top for separation
-      zIndex: 1000, // Ensures the prompt section stays above other content
-    };
-  
-    // Adjusted styles for scrollable response section
-    const scrollableResponseStyle = {
-      marginBottom: '60px', // Adds space at the bottom, so the last message isn't hidden behind the floating prompt
-      overflowY: 'auto', // Enables vertical scrolling
-      maxHeight: 'calc(100vh - 200px)', // Adjusts the height based on viewport height minus other UI elements
-    };
-
-  // Function to toggle the sidebar
-  const toggleSidebar = () => {
-    setIsSidebarVisible(!isSidebarVisible);
+  // Adjusted styles for floating prompt and scrollable response section
+  const floatingPromptStyle = {
+    position: 'fixed', // Makes the prompt section float above other content
+    bottom: 0, // Aligns the prompt section at the bottom of the viewport
+    width: '100%', // Ensures the prompt section spans the entire width of the viewport
+    backgroundColor: '#1a202c', // Matches the color scheme of the prompt section
+    padding: '10px 0', // Adds some padding around the prompt for better appearance
+    borderTop: '1px solid #2d3748', // Adds a subtle border on top for separation
+    zIndex: 1000, // Ensures the prompt section stays above other content
   };
+
+  // Adjusted styles for scrollable response section
+  const scrollableResponseStyle = {
+    marginBottom: '60px', // Adds space at the bottom, so the last message isn't hidden behind the floating prompt
+    overflowY: 'auto', // Enables vertical scrolling
+    maxHeight: 'calc(100vh - 200px)', // Adjusts the height based on viewport height minus other UI elements
+  };
+
+
 
   // Define types for TypeScript
   interface MessageContent {
@@ -141,7 +138,7 @@ export default function Home() {
 
   // Function to handle sending messages, creating threads, and initiating runs
   const handleSendMessage = async (content: string) => {
-    
+
     // Add user's question to the conversation immediately
     setConversation(prev => [...prev, { role: 'user', content }]);
 
@@ -232,30 +229,30 @@ export default function Home() {
     }
   };
 
-// Stream text to the UI
-const typeMessage = (message: string, callback: (arg0: any) => void) => {
-  let index = 0;
-  const interval = setInterval(() => {
-    index++;
-    callback(message.substring(0, index));
-    if (index === message.length) {
-      clearInterval(interval);
-    }
-  }, 50); // Adjust the speed as needed
-};
+  // Stream text to the UI
+  const typeMessage = (message: string, callback: (arg0: any) => void) => {
+    let index = 0;
+    const interval = setInterval(() => {
+      index++;
+      callback(message.substring(0, index));
+      if (index === message.length) {
+        clearInterval(interval);
+      }
+    }, 50); // Adjust the speed as needed
+  };
 
-  
+
   // Call the checkRunStatus upon load and log the message
   useEffect(() => {
     console.log('The component has mounted');
-  
+
     // Assuming checkRunStatus is a function you want to call
     checkRunStatus();
-  
+
     handleSendMessage('I have questions about Scott Manleys history'); // Send a welcome message
-     
+
   }, []); // Empty dependency array to run only once on mount
-  
+
   return (
     <>
       <Head>
@@ -265,25 +262,11 @@ const typeMessage = (message: string, callback: (arg0: any) => void) => {
 
 
       <div className="bg-gray-700 min-h-screen flex">
-        {/* Toggle Icon */}
-        <div className="fixed top-20 left-20 cursor-pointer z-10" onClick={toggleSidebar}>
-          <div className="grid grid-cols-3 gap-1 w-8 h-8">
-            {Array.from({ length: 9 }).map((_, index) => (
-              <div key={index} className="w-2 h-2 bg-gray-300"></div>
-            ))}
-          </div>
-        </div>
 
 
-
-        {/* Collapsible Sidebar */}
-        <div className={`${isSidebarVisible ? 'w-1/5' : 'hidden'} min-w-[100px] bg-black h-full fixed left-0 top-0 bottom-0 transition-width duration-300`}>
-          {/* Sidebar content */}
-              <Sidebar />
-        </div>
 
         {/* Main Content Container */}
-        <div className={`${isSidebarVisible ? 'ml-1/10' : 'ml-0'} p-8 flex justify-center items-center transition-all duration-300 w-full`}>
+        <div className="p-8 flex justify-center items-center transition-all duration-300 w-full">
           <div className="bg-black text-white max-w-4xl w-full rounded-lg shadow-xl overflow-hidden">
             {/* Header */}
             <header className="p-8 border-b border-gray-600">

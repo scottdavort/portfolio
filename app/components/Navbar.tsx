@@ -1,31 +1,49 @@
 import Link from "next/link";
-import styles from '../styles/Home.module.css';
-import { redirect } from "next/dist/server/api-utils";
 import Image from "next/image";
+import React from 'react'; // Ensure React is imported
 
-// Navbar component with a link to the home page
 const Navbar = () => {
   return (
-    <nav className={`${styles.navbar} flexBetween max-container padding-container`}>
-      <div className="flex flex-row-reverse p-2">
-      <Link href="/">
-        {/* Content or logo goes here */}
-        HOME
-      </Link></div>
-      {/* Add the linkedin logo png here and align to the right of the screen*/}
-      <div className="flex flex-row-reverse p-2">
-        <Link href="https://www.linkedin.com/in/scott-manley-az/">
-          <Image src="/images/linkedin.png" alt="linkedin logo" width={25} height={25} />
-        </Link></div>
-      <div className="flex flex-row-reverse p-2">
-        <Link href="https://github.com/scottdavort">
-          <Image src="/images/github.png" alt="github logo" width={25} height={25} />
+    <nav className="flex items-center justify-between bg-slate-600 px-4 py-2">
+      {/* Left section for logos and home link */}
+      <div className="flex items-center space-x-4">
+        <Link href="/" passHref>
+          <div className="text-white hover:underline cursor-pointer">HOME</div>
+        </Link>
+        <Link href="https://www.linkedin.com/in/scott-manley-az/" passHref>
+          <div className="cursor-pointer">
+            <Image src="/images/linkedin.png" alt="LinkedIn logo" width={25} height={25} />
+          </div>
+        </Link>
+        <Link href="https://github.com/scottdavort" passHref>
+          <div className="cursor-pointer">
+            <Image src="/images/github.png" alt="GitHub logo" width={25} height={25} />
+          </div>
         </Link>
       </div>
 
-      {/* Add the github logo png here */}
+      {/* Right section for navigation links */}
+      <div className="flex items-center space-x-4">
+        <Link href="/ask-questions" passHref>
+          <div className="text-white py-2 hover:bg-gray-700 rounded px-2 cursor-pointer">Virtual Interview</div>
+        </Link>
+        <Link href="/field-marketing" passHref>
+          <div className="text-white py-2 hover:bg-gray-700 rounded px-2 cursor-pointer">Field Marketing</div>
+        </Link>
+        <Link href="/product-marketing" passHref>
+          <div className="text-white py-2 hover:bg-gray-700 rounded px-2 cursor-pointer">Product Marketing</div>
+        </Link>
+        <Link href="/business-influencers" passHref>
+          <div className="text-white py-2 hover:bg-gray-700 rounded px-2 cursor-pointer">Business Influencers</div>
+        </Link>
+        <Link href="/sales" passHref>
+          <div className="text-white py-2 hover:bg-gray-700 rounded px-2 cursor-pointer">Sales</div>
+        </Link>
+        <Link href="/about" passHref>
+          <div className="text-white py-2 hover:bg-gray-700 rounded px-2 cursor-pointer">About</div>
+        </Link>
+      </div>
     </nav>
-
   );
 }
 

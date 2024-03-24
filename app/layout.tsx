@@ -49,7 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {/* Additional content or components for the root path */}
             </>
           )}
-          {children}
+          {/* {children} */}
         </main>
         <Footer />
       </body>

@@ -1,3 +1,4 @@
+
 'use client';
 import React from 'react';
 import { motion } from 'framer-motion';
@@ -24,6 +25,12 @@ interface TimelineEntryProps {
 const handleScrollTop = () => {
   window.scrollTo({ top: 0 });
 }
+const handleScroll = () => {
+  window.scrollTo({
+    top: window.innerHeight,
+    behavior: 'smooth'
+  });
+}
 
 const TimelineEntry = ({ title, company, period, description, left }: TimelineEntryProps) => {
   // Additional classes for text container positioning and text alignment
@@ -36,12 +43,12 @@ const TimelineEntry = ({ title, company, period, description, left }: TimelineEn
 
   return (
     // Timeline Entry Container
-    <div className={`flex items-center ${left ? 'flex-row-reverse' : 'flex-row'} w-1/2 ${left ? 'pl-12' : 'pr-12'} mx-auto`}>
+    <div className={`bg-blue-600 py-8 flex items-center ${left ? 'flex-row-reverse' : 'flex-row'} w-1/2 ${left ? 'pl-12' : 'pr-12'} mx-auto`}>
       {/* Circle Element */}
-      <div className={`w-10 h-4 rounded-full bg-red-100 absolute transform -translate-x-1/2  ${circlePositionClass}`} />
+      <div className={`w-10 h-5 rounded-full bg-blue-600 border-2 border-slate-600  absolute transform -translate-x-1/2   ${circlePositionClass}`} />
       {/* Content Container */}
       <div className={`w-1/2 ${textContainerClass}`}>
-        <h3 className="text-lg font-bold  ">{title}</h3>
+        <h3 className="text-lg font-bold ">{title}</h3>
         <p className="text-sm">{company}</p>
         <time className="text-xs">{period}</time>
         <p className="text-sm">{description}</p>
@@ -55,58 +62,80 @@ const TimelineEntry = ({ title, company, period, description, left }: TimelineEn
  */
 function Timeline() {
   const { scrollYProgress } = useViewportScroll();
-  const yPosAnim = useTransform(scrollYProgress, [0, 1], ['-100%', '100%']); // Animate the progress bar's height
- // Entries fade in from 0% to 50% of scroll, then fade out from 50% to 100%
- const entryOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
+  const yPosAnim = useTransform(scrollYProgress, [0, 1], ['-50%', '50%']); // Animate the progress bar's height
+  // Entries fade in from 0% to 50% of scroll, then fade out from 50% to 100%
+  const entryOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
+  const scrollProgressWidth = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   // Timeline data with alternating position
   const timelineData = [
     {
-      title: 'Senior JavaScript Engineer',
-      company: 'Apple',
-      period: '2024 - Present',
-      description: 'Leading the development of innovative JavaScript solutions.',
-      left: false,
-    },
-    {
-      title: 'Senior JavaScript Engineer',
-      company: 'Apple',
-      period: '2024 - Present',
-      description: 'Leading the development of innovative JavaScript solutions.',
+      title: 'Senior Manager of Marketing Operations Consultant Relations',
+      company: 'Lumen Technologies',
+      period: 'Jan 2019 - December 2023',
+      description: 'Led strategic webinars and executive engagement, integrating analyst insights into company strategy.',
       left: true,
     },
     {
-      title: 'Senior JavaScript Engineer',
-      company: 'Apple',
-      period: '2024 - Present',
-      description: 'Leading the development of innovative JavaScript solutions.',
+      title: 'Senior Manager Product Marketing',
+      company: 'CenturyLink',
+      period: 'June 2017 - Jan 2019',
+      description: 'Launched and marketed cloud offerings, developed co-marketing plans and content.',
       left: false,
     },
     {
-      title: 'Senior JavaScript Engineer',
-      company: 'Apple',
-      period: '2024 - Present',
-      description: 'Leading the development of innovative JavaScript solutions.',
+      title: 'Senior Manager Field Marketing',
+      company: 'CenturyLink Business',
+      period: 'Jan 2014 - June 2017',
+      description: 'Directed field marketing efforts, managed events, and implemented partner scale motions.',
       left: true,
     },
     {
-      title: 'Senior JavaScript Engineer',
-      company: 'Apple',
-      period: '2024 - Present',
-      description: 'Leading the development of innovative JavaScript solutions.',
+      title: 'Global Account Manager',
+      company: 'CenturyLink Business',
+      period: 'April 2013 - Jan 2014',
+      description: 'Managed $20 million in annual revenue, fostered cross-group collaboration.',
       left: false,
     },
-
+    {
+      title: 'Strategic Account Manager',
+      company: 'CenturyLink',
+      period: 'Aug 2011 - April 2013',
+      description: 'Drove mid-market revenue growth, strengthened strategic partnerships.',
+      left: true,
+    },
+    {
+      title: 'Senior Account Executive',
+      company: 'CenturyLink',
+      period: 'March 2004 - Aug 2011',
+      description: 'Inbound sales support for small to medium businesses, achieved 1000% of yearly quota in 2009 and 2010.',
+      left: false,
+    },
+    {
+      title: 'IT Helpdesk 1',
+      company: 'AAA Arizona',
+      period: 'Feb 2002 - April 2004',
+      description: 'Desktop support across Phoenix area, deployed IT hardware components.',
+      left: true,
+    },
+    {
+      title: 'Analyst Helpdesk and Desktop Support',
+      company: 'AT&T, Verizon, WorldCom',
+      period: 'Feb 1996 - March 2003',
+      description: 'Held various roles in helpdesk support, analyst desktop support.',
+      left: false,
+    },
     // ... Additional entries
   ];
 
- // Calculate opacity based on scroll progress
- 
+  // Calculate opacity based on scroll progress
 
-  return (
+
+  return (<>
     <motion.div className="timeline-container relative my-8" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 5 }}>
       {/* Progress bar centered in the timeline container */}
-      <motion.div className="timeline-progress-bar bg-white absolute left-1/2 transform -translate-x-1/2 h-full w-2" initial={{ opacity: 0 }} animate={{ opacity: 0.8 }} transition={{ duration: 3 }} style={{ y: yPosAnim }} />
+   {/* Progress tracker bar */}
+       <motion.div className="fixed top-0 left-0 h-1 bg-red-500 z-50" style={{ width: '100%', scaleX: scrollYProgress }} initial={{ scaleX: 0 }} />
 
       {/* Mapping through timeline data to create timeline entries */}
       {timelineData.map((item, index) => (
@@ -117,14 +146,12 @@ function Timeline() {
       ))}
       {/* // Scroll to top button */}
 
-     <button
-    aria-label="Scroll To Top"
-    onClick={handleScrollTop}
-    className=" absolute left-1/3 mt-4 rounded-full bg-gray-200 p-2 text-gray-500 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
-  >Scroll to Top</button>
-
-
-    </motion.div>
+      <button
+        aria-label="Scroll To Top"
+        onClick={handleScroll}
+        className="mt-4 rounded-full bg-gray-200 p-2 text-gray-500 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
+      >Scroll to Top</button>
+    </motion.div></>
 
 
 

@@ -1,9 +1,9 @@
 import React from 'react'
-import FieldMarketing from './page'
+import Page from './page'
 
 const layout = () => {
   return (
-    <FieldMarketing />
+    <Page />
   )
 }
 
